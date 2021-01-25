@@ -6,14 +6,12 @@ const API_URL = 'https://course-vue.javascript.ru/api';
 /** ID митапа для примера; используйте его при получении митапа */
 const MEETUP_ID = 6;
 
-/**
- * Возвращает ссылку на изображение митапа для митапа
- * @param meetup - объект с описанием митапа (и параметром meetupId)
- * @return {string} - ссылка на изображение митапа
- */
-function getMeetupCoverLink(meetup) {
-  return `${API_URL}/images/${meetup.imageId}`;
-}
+const makeDateOnlyString = (date) => {
+  const YYYY = date.getUTCFullYear();
+  const MM = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+  const DD = date.getUTCDate().toString().padStart(2, '0');
+  return `${YYYY}-${MM}-${DD}`;
+};
 
 /**
  * Словарь заголовков по умолчанию для всех типов элементов программы
@@ -48,19 +46,55 @@ export const app = new Vue({
   el: '#app',
 
   data: {
-    //
+    rawMeetup: null,
   },
 
-  mounted() {
-    // Требуется получить данные митапа с API
+  async created() {
+    this.rawMeetup = await this.fetchData();
   },
 
   computed: {
-    //
+    meetup() {
+      if (!this.rawMeetup) {
+        return null;
+      }
+
+      return {
+        ...this.rawMeetup,
+        coverStyle: this.rawMeetup.imageId
+          ? {
+              '--bg-url': `url('${this.makeMeetupCoverLink(
+                this.rawMeetup.imageId,
+              )}')`,
+            }
+          : {},
+        date: this.rawMeetup.date
+          ? new Date(this.rawMeetup.date).toLocaleString(navigator.language, {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })
+          : null,
+        dateOnlyString: this.rawMeetup.date
+          ? makeDateOnlyString(new Date(this.rawMeetup.date))
+          : null,
+        agenda: this.rawMeetup.agenda
+          ? this.rawMeetup.agenda.map((agendaItem) => ({
+              ...agendaItem,
+              title: agendaItem.title || agendaItemTitles[agendaItem.type],
+              icon: agendaItemIcons[agendaItem.type],
+            }))
+          : [],
+      };
+    },
   },
 
   methods: {
-    // Получение данных с API предпочтительнее оформить отдельным методом,
-    // а не писать прямо в mounted()
+    fetchData() {
+      return fetch(`${API_URL}/meetups/${MEETUP_ID}`).then((res) => res.json());
+    },
+    makeMeetupCoverLink(imageId) {
+      return `${API_URL}/images/${imageId}`;
+    },
   },
 });
