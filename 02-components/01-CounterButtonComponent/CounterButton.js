@@ -1,11 +1,9 @@
 export const CounterButton = {
   template:
-    '<button @click="increment" type="button">{{ internalCount }}</button>',
+    '<button @click="increment" type="button">{{ count }}</button>',
 
   data() {
-    return {
-      internalCount: this.count,
-    };
+    return {};
   },
 
   props: {
@@ -18,8 +16,7 @@ export const CounterButton = {
 
   methods: {
     increment: function () {
-      this.internalCount++;
-      this.$emit('increment', this.internalCount);
+      this.$emit('increment', this.count + 1);
     },
   },
 };
