@@ -29,7 +29,7 @@ export default {
 
   methods: {
     error(message) {
-      this._renderToast({
+      this.$_AppToast_renderToast({
         className: 'toast_error',
         icon: 'alert-circle',
         message,
@@ -37,14 +37,14 @@ export default {
     },
 
     success(message) {
-      this._renderToast({
+      this.$_AppToast_renderToast({
         className: 'toast_success',
         icon: 'check-circle',
         message,
       });
     },
 
-    _renderToast(toast) {
+    $_AppToast_renderToast(toast) {
       const toastObj = { ...toast, id: ++id };
       this.toasts.push(toastObj);
       window.setTimeout(() => {
