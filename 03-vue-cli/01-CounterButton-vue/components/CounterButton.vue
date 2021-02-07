@@ -4,10 +4,6 @@
 
 <script>
 export default {
-  data() {
-    return {};
-  },
-
   props: {
     count: {
       type: Number,
