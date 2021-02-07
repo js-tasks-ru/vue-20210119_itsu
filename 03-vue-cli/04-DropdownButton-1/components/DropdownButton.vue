@@ -3,11 +3,8 @@
     <button
       @click="toggleDisplay"
       type="button"
-      :class="[
-        'button',
-        'dropdown__toggle',
-        hasIcon ? 'dropdown__toggle_icon' : '',
-      ]"
+      class="button dropdown__toggle"
+      :class="{ dropdown__toggle_icon: hasIcon }"
     >
       <app-icon
         v-if="selectedOption && selectedOption.icon"
@@ -70,9 +67,13 @@ export default {
     },
     onSelect: function (value) {
       this.$emit('change', value);
-      this.$emit('input', value);
       this.collapse();
     },
+  },
+
+  model: {
+    prop: 'value',
+    event: 'change',
   },
 
   props: {
