@@ -1,5 +1,5 @@
 /** URL адрес API */
-export const API_URL = 'https://course-vue.javascript.ru/api';
+export const API_URL = "https://course-vue.javascript.ru/api";
 
 /**
  * Возвращает ссылку на изображение митапа для митапа

@@ -26,18 +26,22 @@
       <p><a href="?">Reset</a></p>
       <p>
         view:
-        <button @click="$emit('update:view', 'list')">list</button> |
+        <button @click="$emit('update:view', 'list')">list</button>
+        |
         <button @click="$emit('update:view', 'calendar')">calendar</button>
       </p>
       <p>
         date:
-        <button @click="$emit('update:date', 'all')">all</button> |
-        <button @click="$emit('update:date', 'future')">future</button> |
+        <button @click="$emit('update:date', 'all')">all</button>
+        |
+        <button @click="$emit('update:date', 'future')">future</button>
+        |
         <button @click="$emit('update:date', 'past')">past</button>
       </p>
       <p>
         participation:
-        <button @click="$emit('update:participation', 'all')">all</button> |
+        <button @click="$emit('update:participation', 'all')">all</button>
+        |
         <button @click="$emit('update:participation', 'attending')">
           attending
         </button>
@@ -48,8 +52,10 @@
       </p>
       <p>
         search:
-        <button @click="$emit('update:search', '')">''</button> |
-        <button @click="$emit('update:search', 'msk')">msk</button> |
+        <button @click="$emit('update:search', '')">''</button>
+        |
+        <button @click="$emit('update:search', 'msk')">msk</button>
+        |
         <button @click="$emit('update:search', 'value')">value</button>
       </p>
     </fieldset>
