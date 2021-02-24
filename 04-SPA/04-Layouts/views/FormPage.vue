@@ -12,4 +12,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.forms {
+  padding: 70px 0;
+}
+</style>
