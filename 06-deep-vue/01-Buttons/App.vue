@@ -27,7 +27,9 @@
       <secondary-button block>Secondary Block</secondary-button>
     </p>
     <p>
-      <secondary-button tag="a" href="#">Secondary Button Link</secondary-button>
+      <secondary-button tag="a" href="#"
+        >Secondary Button Link</secondary-button
+      >
     </p>
     <hr />
     <p>

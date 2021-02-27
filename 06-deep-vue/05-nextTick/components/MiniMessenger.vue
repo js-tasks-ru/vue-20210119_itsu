@@ -1,7 +1,7 @@
 <template>
   <main>
-    <messages-list class="messages" :messages="messages" />
-    <form @submit.prevent="send" style="display: flex;">
+    <messages-list ref="messagesList" class="messages" :messages="messages" />
+    <form @submit.prevent="send" style="display: flex">
       <input type="text" placeholder="New message" v-model="newMessage" />
       <button>Send</button>
     </form>
@@ -37,6 +37,10 @@ export default {
         text: this.newMessage,
       });
       this.newMessage = '';
+      this.$nextTick(() => {
+        const messagesWrapperEl = this.$refs.messagesList.$refs.wrapper;
+        messagesWrapperEl.scrollTo(0, messagesWrapperEl.scrollHeight);
+      });
     },
   },
 };

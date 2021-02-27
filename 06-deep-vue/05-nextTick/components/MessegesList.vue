@@ -1,5 +1,5 @@
 <template>
-  <div class="messages-list">
+  <div class="messages-list" ref="wrapper">
     <article v-for="message in messages" :key="message.id" class="message">
       {{ message.text }}
     </article>
